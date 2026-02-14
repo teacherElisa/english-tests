@@ -6,35 +6,39 @@
     <title>AJ Mastery Hub - Elisa's Class</title>
     <style>
         :root { --primary: #4a90e2; --secondary: #f39c12; --bg: #f8fbfd; --success: #2ecc71; --error: #e74c3c; --text: #2c3e50; }
-        body { font-family: 'Comic Sans MS', 'Segoe UI', cursive, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        body { font-family: 'Segoe UI', 'Comic Sans MS', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
         .app-container { max-width: 950px; margin: 0 auto; background: white; padding: 25px; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border: 5px solid var(--primary); }
         h1 { text-align: center; color: var(--primary); font-size: 2.2rem; margin-top: 0; text-shadow: 2px 2px 0px #eee; }
+        
         .sections { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
         .sec-btn { padding: 12px 20px; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; background: #eee; font-size: 1rem; transition: 0.3s; }
-        .sec-btn.active { background: var(--primary); color: white; transform: scale(1.05); box-shadow: 0 4px 10px rgba(74,144,226,0.3); }
+        .sec-btn.active { background: var(--primary); color: white; transform: scale(1.05); }
         .sec-btn.dash { background: #9b59b6; color: white; }
+
         .exercise-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 25px; background: #f0f7ff; padding: 20px; border-radius: 20px; }
         .ex-btn { width: 45px; height: 45px; border: 2px solid var(--primary); background: white; border-radius: 50%; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: 0.2s; }
-        .ex-btn.active { background: var(--primary); color: white; transform: translateY(-3px); }
+        .ex-btn.active { background: var(--primary); color: white; }
         .ex-btn.done { background: var(--success); border-color: var(--success); color: white; }
+
         .question-card { margin-bottom: 25px; padding: 25px; border: 2px dashed #cbd5e0; border-radius: 20px; background: #fff; position: relative; }
         .q-text { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; line-height: 1.4; }
         .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
-        label { padding: 15px; border: 2px solid #edf2f7; border-radius: 15px; cursor: pointer; display: flex; align-items: center; gap: 12px; font-size: 1.1rem; transition: 0.2s; }
+        label { padding: 15px; border: 2px solid #edf2f7; border-radius: 15px; cursor: pointer; display: flex; align-items: center; gap: 12px; font-size: 1.1rem; }
         label:hover { background: #f7fafc; border-color: var(--primary); }
-        .hint-btn { background: var(--secondary); color: white; border: none; padding: 6px 12px; border-radius: 12px; cursor: pointer; font-size: 0.9rem; float: right; font-weight: bold; }
+        .hint-btn { background: var(--secondary); color: white; border: none; padding: 6px 12px; border-radius: 12px; cursor: pointer; font-size: 0.9rem; float: right; }
         .hint-box { display: none; background: #fff9db; padding: 15px; border-radius: 12px; margin-top: 15px; border-left: 6px solid var(--secondary); font-style: italic; }
-        .btn-check { padding: 18px 50px; background: var(--success); color: white; border: none; border-radius: 50px; font-size: 1.4rem; font-weight: bold; cursor: pointer; box-shadow: 0 6px 0 #27ae60; width: 100%; margin-top: 20px; }
-        .stat-card { padding: 20px; background: #f9f9f9; border-radius: 20px; border: 2px solid #eee; text-align: center; transition: 0.3s; }
-        .stat-card.good { background: #eafff2; border-color: var(--success); transform: scale(1.05); }
+
+        .btn-check { width: 100%; padding: 18px; background: var(--success); color: white; border: none; border-radius: 50px; font-size: 1.4rem; font-weight: bold; cursor: pointer; margin-top: 30px; box-shadow: 0 6px 0 #27ae60; }
+        .stat-card { padding: 20px; background: #f9f9f9; border-radius: 20px; border: 2px solid #eee; text-align: center; }
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 20px; }
         #certificate { display: none; text-align: center; padding: 50px; border: 12px double var(--secondary); margin-top: 30px; border-radius: 30px; background: #fffef0; }
-        .feedback { margin-top: 10px; font-weight: bold; font-size: 1.1rem; display: none; }
+        .feedback { font-weight: bold; margin-top: 10px; display: none; }
     </style>
 </head>
 <body>
+
 <div class="app-container">
-    <h1>🇬🇧 AJ Mastery Hub for Elisa's Class</h1>
+    <h1>🇬🇧 English Learning Hub for Elisa's Class</h1>
     <div class="sections">
         <button class="sec-btn active" id="sec-pronouns" onclick="changeSection('pronouns')">Pronouns (1-10)</button>
         <button class="sec-btn" id="sec-adverbs" onclick="changeSection('adverbs')">Adverbs (11-13)</button>
@@ -42,10 +46,8 @@
         <button class="sec-btn dash" onclick="showDashboard()">📊 My Progress</button>
     </div>
     <div id="exercise-nav" class="exercise-grid"></div>
-    <div id="content-area">
-        <div id="quiz-view"></div>
-        <div class="check-area"><button class="btn-check" onclick="checkEx()">Check My Answers! 🌟</button></div>
-    </div>
+    <div id="quiz-area"></div>
+    <div id="check-btn-area" style="text-align:center;"><button class="btn-check" onclick="checkEx()">Check My Answers! 🌟</button></div>
     <div id="dashboard-view" style="display:none;">
         <h2 style="text-align:center;">My Grammar Stars 🌟</h2>
         <div class="dashboard-grid" id="dash-grid"></div>
@@ -57,298 +59,330 @@
         </div>
     </div>
 </div>
+
 <script>
-const allEx = [
+// Kompletní data pro všech 18 cvičení s odpověďmi a tipy
+const allExercises = [
     { id: 1, section: 'pronouns', title: "Exercise 1: Pronouns", questions: [
-        { t: "“I would never lie to ________,” Marcus told John.", o: ["she", "you", "us", "he"], a: 1, h: "Mluvíš k Johnovi přímo? Použij 'you'." },
-        { t: "Daniel, my brother, is more intelligent than ________.", o: ["me", "her", "mine", "I"], a: 3, h: "V oficiální gramatice po 'than' následuje podmět (than I am)." },
-        { t: "You must attend classes if you want to learn how to make sushi ________.", o: ["herself", "yourself", "myself", "themselves"], a: 1, h: "Reflexivní zájmeno pro 'you' je 'yourself'." },
-        { t: "I took a shortcut through the forest on ________ own even though it was dark.", o: ["my", "his", "our", "her"], a: 0, h: "Vazba 'on my/his/her own' znamená 'sám'." },
-        { t: "After listening to what John had to say, the manager listened to ________ side of the story as well.", o: ["ours", "mine", "them", "my"], a: 3, h: "Můj příběh -> my side." },
-        { t: "Ben and Joyce engaged a wedding planner to make ________ wedding a grand affair.", o: ["he", "mine", "their", "ours"], a: 2, h: "Jejich svatba -> their wedding." },
-        { t: "The security guards tried to stop the shoplifter from running away but she was too fast for ________.", o: ["her", "us", "him", "them"], a: 3, h: "Mluvíme o nich (strážnících) -> them." },
-        { t: "“If you do not come to a decision soon, ________ are going to sign up for the tour without you,” the twins told Marie.", o: ["we", "she", "you", "I"], a: 0, h: "Dvojčata mluví za sebe -> we." },
-        { t: "Alan and I completed the project ________ without any help from anyone.", o: ["themselves", "yourselves", "ourselves", "myself"], a: 2, h: "My jsme to udělali -> ourselves." },
-        { t: "The computer ________ is a useless machine unless there are good computer programmers around.", o: ["herself", "themselves", "yourself", "itself"], a: 3, h: "Věci/stroje mají reflexivní zájmeno 'itself'." }
+        { t: "“I would never lie to ________,” Marcus told John.", o: ["she", "you", "us", "he"], a: 1, h: "Talking to John -> you." },
+        { t: "Daniel, my brother, is more intelligent than ________.", o: ["me", "her", "mine", "I"], a: 3, h: "Formal: than + subject form (I)." },
+        { t: "You must learn how to make sushi ________.", o: ["herself", "yourself", "myself", "themselves"], a: 1, h: "You (singular) -> yourself." },
+        { t: "I took a shortcut through the forest on ________ own.", o: ["my", "his", "our", "her"], a: 0, h: "I -> on my own." },
+        { t: "The manager listened to ________ side of the story as well.", o: ["ours", "mine", "them", "my"], a: 3, h: "My side of the story." },
+        { t: "Ben and Joyce engaged a planner to make ________ wedding a grand affair.", o: ["he", "mine", "their", "ours"], a: 2, h: "Their (Ben and Joyce) wedding." },
+        { t: "The guards tried to stop the shoplifter but she was too fast for ________.", o: ["her", "us", "him", "them"], a: 3, h: "Too fast for them (guards)." },
+        { t: "“________ are going to sign up for the tour,” the twins told Marie.", o: ["we", "she", "you", "I"], a: 0, h: "Twins speaking for themselves -> we." },
+        { t: "Alan and I completed the project ________.", o: ["themselves", "yourselves", "ourselves", "myself"], a: 2, h: "Alan and I -> ourselves." },
+        { t: "The computer ________ is a useless machine.", o: ["herself", "themselves", "yourself", "itself"], a: 3, h: "Computer (thing) -> itself." }
     ], score: null },
     { id: 2, section: 'pronouns', title: "Exercise 2: Pronouns", questions: [
-        { t: "Colin encouraged his sister to talk to _______ whenever she had problems.", o: ["she", "they", "him", "I"], a: 2, h: "Mluví ke svému bratrovi (jemu) -> him." },
-        { t: "Ben will meet Sandra and _______ in front of the library tomorrow.", o: ["I", "me", "he", "they"], a: 1, h: "Potká 'mě' (předmětový tvar) -> me." },
-        { t: "I got a free gift at the entrance of the zoo. Did you get _______?", o: ["mine", "her", "them", "yours"], a: 3, h: "Tvoje (samostatně stojící) -> yours." },
-        { t: "I do not play the violin. This violin is definitely not _______.", o: ["mine", "my", "hers", "his"], a: 0, h: "Moje -> mine." },
-        { t: "“Do _______ want to watch a show with me?” Gerald asked Terry.", o: ["I", "you", "we", "them"], a: 1, h: "Ptá se někoho přímo (ty) -> you." },
-        { t: "“Please inform her _______ of the outing tomorrow,” Jack told Ben.", o: ["yourself", "himself", "herself", "themselves"], a: 0, h: "Informuj ji TY SÁM -> yourself." },
-        { t: "Animals who cannot take care of their young _______ often leave them to die in the wild.", o: ["himself", "itself", "herself", "themselves"], a: 3, h: "Zvířata (oni) -> themselves." },
-        { t: "You have to turn up at the immigration department _______ to collect your passport.", o: ["himself", "herself", "yourself", "ourselves"], a: 2, h: "Ty osobně -> yourself." },
-        { t: "“If Jack wants to know where you are, what do you want me to tell _______?” Samantha asked me.", o: ["her", "you", "him", "them"], a: 2, h: "Říct Jackovi (jemu) -> him." },
-        { t: "Cheryl saved her pocket money so that she could pay for the new dress _______.", o: ["itself", "herself", "themselves", "himself"], a: 1, h: "Ona sama -> herself." }
+        { t: "Colin encouraged his sister to talk to _______.", o: ["she", "they", "him", "I"], a: 2, h: "Talk to him (Colin)." },
+        { t: "Ben will meet Sandra and _______ in front of the library.", o: ["I", "me", "he", "they"], a: 1, h: "Object form: meet me." },
+        { t: "I got a free gift. Did you get _______?", o: ["mine", "her", "them", "yours"], a: 3, h: "Possessive: yours." },
+        { t: "I do not play the violin. This violin is definitely not _______.", o: ["mine", "my", "hers", "his"], a: 0, h: "Not mine." },
+        { t: "“Do _______ want to watch a show with me?” Gerald asked Terry.", o: ["I", "you", "we", "them"], a: 1, h: "Asking Terry -> you." },
+        { t: "“Please inform her _______ of the outing,” Jack told Ben.", o: ["yourself", "himself", "herself", "themselves"], a: 0, h: "Jack telling Ben -> (do it) yourself." },
+        { t: "Animals who cannot take care of their young _______ often leave them.", o: ["himself", "itself", "herself", "themselves"], a: 3, h: "Animals (plural) -> themselves." },
+        { t: "You have to turn up at the immigration department _______.", o: ["himself", "herself", "yourself", "ourselves"], a: 2, h: "You -> yourself." },
+        { t: "“If Jack wants to know where you are, tell _______.”", o: ["her", "you", "him", "them"], a: 2, h: "Tell him (Jack)." },
+        { t: "Cheryl saved her pocket money to pay for the dress _______.", o: ["itself", "herself", "themselves", "himself"], a: 1, h: "Cheryl (she) -> herself." }
     ], score: null },
     { id: 3, section: 'pronouns', title: "Exercise 3: Pronouns", questions: [
-        { t: "The lady ________ I was speaking to was a reporter.", o: ["who", "whose", "whom", "which"], a: 2, h: "Vztažné zájmeno pro osobu v předmětu (koho) -> whom." },
-        { t: "The creature ________ you saw was a jellyfish.", o: ["which", "who", "whom", "whose"], a: 0, h: "Pro věci a zvířata používáme 'which'." },
-        { t: "Josephine and I apologized to Karen but she refused to listen to ________.", o: ["them", "you", "we", "us"], a: 3, h: "Neposlouchala 'nás' -> us." },
-        { t: "Jeremy and I were cycling in the park when a dog ran towards ________.", o: ["them", "us", "theirs", "her"], a: 1, h: "Běžel k 'nám' -> us." },
-        { t: "Seeing how sad ________ was, I went over to comfort her.", o: ["he", "it", "she", "I"], a: 2, h: "Mluvíme o ní (ona) -> she." },
-        { t: "Please return ________ library books on time if you do not want to pay a fine.", o: ["your", "he", "hers", "mine"], a: 0, h: "Tvoje knihy -> your." },
-        { t: "My mother will take Cindy and ________ to the swimming complex tomorrow.", o: ["I", "me", "he", "they"], a: 1, h: "Vezme 'mě' -> me." },
-        { t: "The student ________ writes the best story will represent the school.", o: ["which", "who", "whom", "whose"], a: 1, h: "Vztažné zájmeno pro osobu v podmětu (kdo) -> who." },
-        { t: "My uncle spent more than ten years of ________ life living among the Bushmen.", o: ["her", "their", "our", "his"], a: 3, h: "Jeho život -> his." },
-        { t: "“Do help ________ to the drinks,” Mrs Carroll told her guests.", o: ["yourself", "ourselves", "themselves", "yourselves"], a: 3, h: "Nabídněte si (vy všichni) -> yourselves." }
+        { t: "The lady ________ I was speaking to was a reporter.", o: ["who", "whose", "whom", "which"], a: 2, h: "Object relative pronoun -> whom." },
+        { t: "The creature ________ you saw was a jellyfish.", o: ["which", "who", "whom", "whose"], a: 0, h: "Thing/animal -> which." },
+        { t: "Karen refused to listen to ________ (Josephine and I).", o: ["them", "you", "we", "us"], a: 3, h: "Us (Josephine and I)." },
+        { t: "A dog ran towards ________ (Jeremy and I).", o: ["them", "us", "theirs", "her"], a: 1, h: "Towards us." },
+        { t: "Seeing how sad ________ was, I went over to comfort her.", o: ["he", "it", "she", "I"], a: 2, h: "Comfort her -> she was sad." },
+        { t: "Please return ________ library books on time.", o: ["your", "he", "hers", "mine"], a: 0, h: "Your books." },
+        { t: "Mother will take Cindy and ________ to the complex.", o: ["I", "me", "he", "they"], a: 1, h: "Take me." },
+        { t: "The student ________ writes the best story will win.", o: ["which", "who", "whom", "whose"], a: 1, h: "Subject relative -> who." },
+        { t: "My uncle spent ten years of ________ life in Africa.", o: ["her", "their", "our", "his"], a: 3, h: "His (uncle's) life." },
+        { t: "“Do help ________ to the drinks,” Mrs Carroll told her guests.", o: ["yourself", "ourselves", "themselves", "yourselves"], a: 3, h: "Guests (plural) -> yourselves." }
     ], score: null },
     { id: 4, section: 'pronouns', title: "Exercise 4: Pronouns", questions: [
-        { t: "The driver ________ was responsible for the accident is in police custody.", o: ["whose", "whom", "which", "who"], a: 3, h: "Kdo byl zodpovědný -> who." },
-        { t: "Elephants are mammals which give birth to ________ young alive.", o: ["its", "them", "their", "our"], a: 2, h: "Jejich mláďata (slonů) -> their." },
-        { t: "Once this statue is completed, ________ will be the tallest one in Singapore.", o: ["they", "it", "we", "you"], a: 1, h: "Mluvíme o soše (to) -> it." },
-        { t: "Everyone at the stadium cheered until ________ were hoarse.", o: ["he", "they", "we", "you"], a: 1, h: "Everyone se v angličtině často odkazuje zájmenem 'they'." },
-        { t: "“Have you seen ________ file? I left it here a few minutes ago,” said Joyce.", o: ["mine", "yours", "hers", "my"], a: 3, h: "Moje složka -> my file." },
-        { t: "The foreman is a person ________ job is to take charge of workers.", o: ["who", "whose", "which", "whom"], a: 1, h: "Čí práce (jehož) -> whose." },
-        { t: "Those ________ entered the contest will have a chance of winning.", o: ["who", "whom", "which", "whose"], a: 0, h: "Ti, kteří -> those who." },
-        { t: "Did you keep the admission letter ________ the school sent you?", o: ["who", "whose", "which", "whom"], a: 2, h: "Dopis (věc) -> which." },
-        { t: "Janice and I were the first to finish. Mrs Leroy gave both of ________ a prize.", o: ["them", "her", "us", "you"], a: 2, h: "Dala 'nám' -> us." },
-        { t: "Shirley took it upon ________ to take care of her sisters.", o: ["myself", "himself", "herself", "yourself"], a: 2, h: "Vzala to na sebe (ona) -> herself." }
+        { t: "The driver ________ was responsible is in custody.", o: ["whose", "whom", "which", "who"], a: 3, h: "Who (subject)." },
+        { t: "Elephants give birth to ________ young alive.", o: ["its", "them", "their", "our"], a: 2, h: "Their (elephants') young." },
+        { t: "Once this statue is completed, ________ will be the tallest.", o: ["they", "it", "we", "you"], a: 1, h: "Statue -> it." },
+        { t: "Everyone cheered until ________ were hoarse.", o: ["he", "they", "we", "you"], a: 1, h: "Everyone -> they." },
+        { t: "“Have you seen ________ file?” said Joyce.", o: ["mine", "yours", "hers", "my"], a: 3, h: "My file." },
+        { t: "The foreman is a person ________ job is to take charge.", o: ["who", "whose", "which", "whom"], a: 1, h: "Whose (belonging to the person)." },
+        { t: "Those ________ entered the contest will have a chance.", o: ["who", "whom", "which", "whose"], a: 0, h: "People -> who." },
+        { t: "Did you keep the letter ________ the school sent you?", o: ["who", "whose", "which", "whom"], a: 2, h: "Letter -> which." },
+        { t: "Mrs Leroy gave both of ________ a prize.", o: ["them", "her", "us", "you"], a: 2, h: "Us (Janice and I)." },
+        { t: "Shirley took it upon ________ to take care of her sisters.", o: ["myself", "himself", "herself", "yourself"], a: 2, h: "Shirley (she) -> herself." }
     ], score: null },
     { id: 5, section: 'pronouns', title: "Exercise 5: Pronouns", questions: [
-        { t: "Joanne put her shoes on the floor but ________ are in the shoe cabinet.", o: ["my", "her", "he", "mine"], a: 3, h: "Moje (boty) -> mine." },
-        { t: "Peter kept the biscuits for ________ instead of sharing them.", o: ["themselves", "itself", "himself", "herself"], a: 2, h: "Pro sebe (on) -> himself." },
-        { t: "To disguise ________, Anthony wore a mask.", o: ["herself", "himself", "myself", "yourself"], a: 1, h: "Aby se maskoval (on sám) -> himself." },
-        { t: "Would you have believed ________ if I had told you the truth?", o: ["me", "I", "he", "she"], a: 0, h: "Věřili byste 'mně' -> me." },
-        { t: "All the employees ________ helped out in the project were given a pay rise.", o: ["who", "whom", "whose", "which"], a: 0, h: "Lidé, kteří -> who." },
-        { t: "On Children's Day, our teacher, Mrs Dias, gave each of ________ a lollipop.", o: ["he", "us", "her", "we"], a: 1, h: "Dala každému z 'nás' -> us." },
-        { t: "The girl ________ father was involved in an accident is in hospital.", o: ["who", "whom", "which", "whose"], a: 3, h: "Dívka, jejíž otec -> whose." },
-        { t: "“Stay by the side of the road if ________ do not want to be knocked down,” Thomas told his sister.", o: ["they", "I", "you", "we"], a: 2, h: "Mluví k sestře (ty) -> you." },
-        { t: "The fish at the stall were so fresh that many people queued up to buy ________.", o: ["it", "them", "her", "him"], a: 1, h: "Koupit 'je' (ty ryby) -> them." },
-        { t: "Mr Andrews told us to submit ________ individual assignments to him.", o: ["their", "his", "our", "its"], a: 2, h: "Naše úkoly -> our." }
+        { t: "Joanne put her shoes on the floor but ________ are in the cabinet.", o: ["my", "her", "he", "mine"], a: 3, h: "Mine (my shoes)." },
+        { t: "Peter kept the biscuits for ________ instead of sharing.", o: ["themselves", "itself", "himself", "herself"], a: 2, h: "He -> himself." },
+        { t: "To disguise ________, Anthony wore a mask.", o: ["herself", "himself", "myself", "yourself"], a: 1, h: "Anthony (he) -> himself." },
+        { t: "Would you have believed ________ if I told the truth?", o: ["me", "I", "he", "she"], a: 0, h: "Believe me." },
+        { t: "All the employees ________ helped were given a rise.", o: ["who", "whom", "whose", "which"], a: 0, h: "People -> who." },
+        { t: "Mrs Dias gave each of ________ a lollipop.", o: ["he", "us", "her", "we"], a: 1, h: "Us (the students)." },
+        { t: "The girl ________ father was involved is in hospital.", o: ["who", "whom", "which", "whose"], a: 3, h: "Whose father." },
+        { t: "“Stay by the road if ________ do not want to be knocked down.”", o: ["they", "I", "you", "we"], a: 2, h: "You." },
+        { t: "The fish were fresh so many people bought ________.", o: ["it", "them", "her", "him"], a: 1, h: "Fish (plural) -> them." },
+        { t: "Mr Andrews told us to submit ________ assignments.", o: ["their", "his", "our", "its"], a: 2, h: "Our assignments." }
     ], score: null },
     { id: 6, section: 'pronouns', title: "Exercise 6: Pronouns", questions: [
-        { t: "Ben and Joyce engaged a wedding planner to make ________ wedding a grand affair.", o: ["he", "mine", "their", "ours"], a: 2, h: "Jejich svatba -> their." },
-        { t: "“The flowers are lovely. Who sent ________?” asked Mother.", o: ["them", "it", "her", "him"], a: 0, h: "Kdo 'je' poslal (květiny) -> them." },
-        { t: "Mother will give Larry and ________ some money for lunch.", o: ["I", "me", "they", "he"], a: 1, h: "Dá 'mně' -> me." },
-        { t: "“This is not my pen. Is it ________?” asked Mary.", o: ["you", "your", "mine", "yours"], a: 3, h: "Je tvoje? -> yours." },
-        { t: "“Tell ________ what happened,” said the police officer to the boys.", o: ["we", "our", "us", "ours"], a: 2, h: "Řekněte 'nám' -> us." },
-        { t: "The players congratulated ________ on their victory.", o: ["himself", "ourselves", "themselves", "herself"], a: 2, h: "Pogratulovali si (oni) -> themselves." },
-        { t: "The woman ________ son won the contest was very proud.", o: ["who", "whose", "whom", "which"], a: 1, h: "Žena, jejíž syn -> whose." },
-        { t: "“I can’t find my keys. Have you seen ________?”", o: ["them", "it", "they", "their"], a: 0, h: "Viděl jsi 'je' (klíče) -> them." },
-        { t: "“We must protect ________ from the cold,” said the explorer.", o: ["themselves", "himself", "ourselves", "yourself"], a: 2, h: "Musíme 'se' chránit (my) -> ourselves." },
-        { t: "The bridge ________ was built last year has collapsed.", o: ["who", "whom", "which", "whose"], a: 2, h: "Most (věc) -> which." }
+        { t: "Ben and Joyce want to make ________ wedding grand.", o: ["he", "mine", "their", "ours"], a: 2, h: "Their wedding." },
+        { t: "“The flowers are lovely. Who sent ________?”", o: ["them", "it", "her", "him"], a: 0, h: "Them (flowers)." },
+        { t: "Mother will give Larry and ________ some money.", o: ["I", "me", "they", "he"], a: 1, h: "Give me." },
+        { t: "“This is not my pen. Is it ________?” asked Mary.", o: ["you", "your", "mine", "yours"], a: 3, h: "Yours." },
+        { t: "“Tell ________ what happened,” said the officer.", o: ["we", "our", "us", "ours"], a: 2, h: "Tell us." },
+        { t: "The players congratulated ________ on their victory.", o: ["himself", "ourselves", "themselves", "herself"], a: 2, h: "They -> themselves." },
+        { t: "The woman ________ son won was very proud.", o: ["who", "whose", "whom", "which"], a: 1, h: "Whose son." },
+        { t: "“I can’t find my keys. Have you seen ________?”", o: ["them", "it", "they", "their"], a: 0, h: "Them (keys)." },
+        { t: "“We must protect ________ from the cold.”", o: ["themselves", "himself", "ourselves", "yourself"], a: 2, h: "We -> ourselves." },
+        { t: "The bridge ________ was built last year collapsed.", o: ["who", "whom", "which", "whose"], a: 2, h: "Bridge -> which." }
     ], score: null },
     { id: 7, section: 'pronouns', title: "Exercise 7: Pronouns", questions: [
-        { t: "The security guards tried to stop the shoplifter but she was too fast for ________.", o: ["her", "us", "him", "them"], a: 3, h: "Byla moc rychlá pro 'ně' -> them." },
-        { t: "“Is this ________ bag?” asked the teacher.", o: ["your", "you", "mine", "yours"], a: 0, h: "Tvoje taška -> your." },
-        { t: "The boy ________ is sitting there is my cousin.", o: ["which", "whose", "whom", "who"], a: 3, h: "Kluk, který -> who." },
-        { t: "“I didn’t do it ________,” said the little girl.", o: ["herself", "themselves", "myself", "yourself"], a: 2, h: "Já sama jsem to neudělala -> myself." },
-        { t: "The books ________ are on the table belong to the library.", o: ["which", "who", "whom", "whose"], a: 0, h: "Knihy (věci) -> which." },
-        { t: "“Did you see ________?” asked the detective.", o: ["he", "they", "him", "we"], a: 2, h: "Viděli jste 'ho' -> him." },
-        { t: "The house ________ roof was damaged has been repaired.", o: ["who", "whom", "whose", "which"], a: 2, h: "Dům, jehož střecha -> whose." },
-        { t: "“We should enjoy ________,” said the host to the guests.", o: ["ourselves", "yourselves", "themselves", "himself"], a: 0, h: "Měli bychom se bavit (my) -> ourselves." },
-        { t: "“Give ________ the book,” said the librarian.", o: ["her", "she", "they", "I"], a: 0, h: "Dejte 'jí' knihu -> her." },
-        { t: "The dog ________ was barking all night is now quiet.", o: ["which", "who", "whom", "whose"], a: 0, h: "Pes (zvíře) -> which." }
+        { t: "She was too fast for ________ (the guards).", o: ["her", "us", "him", "them"], a: 3, h: "Them." },
+        { t: "“Is this ________ bag?” asked the teacher.", o: ["your", "you", "mine", "yours"], a: 0, h: "Your bag." },
+        { t: "The boy ________ is sitting there is my cousin.", o: ["which", "whose", "whom", "who"], a: 3, h: "Who." },
+        { t: "“I didn’t do it ________,” said the little girl.", o: ["herself", "themselves", "myself", "yourself"], a: 2, h: "I -> myself." },
+        { t: "The books ________ are on the table belong to the library.", o: ["which", "who", "whom", "whose"], a: 0, h: "Books -> which." },
+        { t: "“Did you see ________?” asked the detective.", o: ["he", "they", "him", "we"], a: 2, h: "See him." },
+        { t: "The house ________ roof was damaged has been repaired.", o: ["who", "whom", "whose", "which"], a: 2, h: "Whose roof." },
+        { t: "“We should enjoy ________,” said the host.", o: ["ourselves", "yourselves", "themselves", "himself"], a: 0, h: "We -> ourselves." },
+        { t: "“Give ________ the book,” said the librarian.", o: ["her", "she", "they", "I"], a: 0, h: "Give her." },
+        { t: "The dog ________ was barking all night is now quiet.", o: ["which", "who", "whom", "whose"], a: 0, h: "Dog -> which." }
     ], score: null },
-{ id: 8, section: 'pronouns', title: "Exercise 8: Pronouns", questions: [
-        { t: "“If you do not come to a decision soon, ________ are going to sign up for the tour without you,” the twins told Marie.", o: ["we", "she", "you", "I"], a: 0, h: "Dvojčata mluví za sebe (my) -> we." },
-        { t: "“I will do it ________,” promised the boy.", o: ["herself", "themselves", "ourselves", "myself"], a: 3, h: "Já sám (kluk) -> myself." },
-        { t: "The car ________ crashed was a red one.", o: ["who", "whom", "which", "whose"], a: 2, h: "Auto (věc) -> which." },
-        { t: "“Did you meet ________?” asked my sister.", o: ["she", "her", "they", "he"], a: 1, h: "Potkat 'ji' (předmět) -> her." },
-        { t: "The girl ________ father is a doctor is in my class.", o: ["who", "whom", "which", "whose"], a: 3, h: "Dívka, jejíž otec -> whose." },
-        { t: "“We must help ________,” said the coach to the team.", o: ["themselves", "himself", "ourselves", "yourself"], a: 2, h: "My (tým) si musíme pomáhat -> ourselves." },
-        { t: "The students ________ passed the exam were very happy.", o: ["which", "who", "whom", "whose"], a: 1, h: "Studenti (lidé), kteří -> who." },
-        { t: "“Is this ________ umbrella?” asked the stranger.", o: ["your", "you", "mine", "yours"], a: 0, h: "Tvoje (před podstatným jménem) -> your." },
-        { t: "“Tell ________ the truth,” said the judge.", o: ["he", "they", "him", "we"], a: 2, h: "Řekni 'jemu' (předmět) -> him." },
-        { t: "The tree ________ fell down was very old.", o: ["who", "whom", "which", "whose"], a: 2, h: "Strom (věc) -> which." }
+    { id: 8, section: 'pronouns', title: "Exercise 8: Pronouns", questions: [
+        { t: "“________ are going to sign up without you,” the twins told Marie.", o: ["we", "she", "you", "I"], a: 0, h: "We (the twins)." },
+        { t: "“I will do it ________,” promised the boy.", o: ["herself", "themselves", "ourselves", "myself"], a: 3, h: "I -> myself." },
+        { t: "The car ________ crashed was red.", o: ["who", "whom", "which", "whose"], a: 2, h: "Car -> which." },
+        { t: "“Did you meet ________?” asked my sister.", o: ["she", "her", "they", "he"], a: 1, h: "Meet her." },
+        { t: "The girl ________ father is a doctor is in my class.", o: ["who", "whom", "which", "whose"], a: 3, h: "Whose father." },
+        { t: "“We must help ________,” said the coach.", o: ["themselves", "himself", "ourselves", "yourself"], a: 2, h: "We -> ourselves." },
+        { t: "The students ________ passed were happy.", o: ["which", "who", "whom", "whose"], a: 1, h: "People -> who." },
+        { t: "“Is this ________ umbrella?”", o: ["your", "you", "mine", "yours"], a: 0, h: "Your umbrella." },
+        { t: "“Tell ________ the truth,” said the judge.", o: ["he", "they", "him", "we"], a: 2, h: "Tell him." },
+        { t: "The tree ________ fell was old.", o: ["who", "whom", "which", "whose"], a: 2, h: "Tree -> which." }
     ], score: null },
     { id: 9, section: 'pronouns', title: "Exercise 9: Pronouns", questions: [
-        { t: "Alan and I completed the project ________ without any help from anyone.", o: ["themselves", "yourselves", "ourselves", "myself"], a: 2, h: "My jsme to udělali sami -> ourselves." },
-        { t: "“I am going to the movies. Do you want to come with ________?”", o: ["I", "me", "they", "he"], a: 1, h: "Pojď se 'mnou' (předmět) -> me." },
-        { t: "The woman ________ is talking to the principal is my mother.", o: ["which", "whose", "whom", "who"], a: 3, h: "Žena (člověk), která -> who." },
-        { t: "“Is this ________ seat?” asked the passenger.", o: ["your", "you", "mine", "yours"], a: 0, h: "Tvoje sedadlo -> your." },
-        { t: "The bird ________ was singing so sweetly has flown away.", o: ["which", "who", "whom", "whose"], a: 0, h: "Pták (zvíře) -> which." },
-        { t: "“Did you see ________?” asked the boy.", o: ["they", "he", "them", "we"], a: 2, h: "Viděli jste 'je' (předmět) -> them." },
-        { t: "The man ________ car was stolen has reported it to the police.", o: ["who", "whom", "whose", "which"], a: 2, h: "Muž, jehož auto -> whose." },
-        { t: "“We can do it ________,” said the children.", o: ["himself", "herself", "ourselves", "themselves"], a: 3, h: "Děti (oni) to udělají sami -> themselves." },
-        { t: "“Give ________ the pencil,” said the teacher.", o: ["him", "he", "they", "I"], a: 0, h: "Dej 'jemu' (předmět) -> him." },
-        { t: "The film ________ we watched was very exciting.", o: ["which", "who", "whom", "whose"], a: 0, h: "Film (věc) -> which." }
+        { t: "Alan and I completed the project ________.", o: ["themselves", "yourselves", "ourselves", "myself"], a: 2, h: "We -> ourselves." },
+        { t: "“Do you want to come with ________?”", o: ["I", "me", "they", "he"], a: 1, h: "With me." },
+        { t: "The woman ________ is talking to the principal is my mother.", o: ["which", "whose", "whom", "who"], a: 3, h: "Who." },
+        { t: "“Is this ________ seat?” asked the passenger.", o: ["your", "you", "mine", "yours"], a: 0, h: "Your seat." },
+        { t: "The bird ________ was singing flew away.", o: ["which", "who", "whom", "whose"], a: 0, h: "Bird -> which." },
+        { t: "“Did you see ________?” asked the boy.", o: ["they", "he", "them", "we"], a: 2, h: "See them." },
+        { t: "The man ________ car was stolen reported it.", o: ["who", "whom", "whose", "which"], a: 2, h: "Whose car." },
+        { t: "“We can do it ________,” said the children.", o: ["himself", "herself", "ourselves", "themselves"], a: 3, h: "They -> themselves." },
+        { t: "“Give ________ the pencil,” said the teacher.", o: ["him", "he", "they", "I"], a: 0, h: "Give him." },
+        { t: "The film ________ we watched was exciting.", o: ["which", "who", "whom", "whose"], a: 0, h: "Film -> which." }
     ], score: null },
     { id: 10, section: 'pronouns', title: "Exercise 10: Pronouns", questions: [
-        { t: "The computer ________ is a useless machine unless there are programmers.", o: ["herself", "themselves", "yourself", "itself"], a: 3, h: "Počítač (věc) sám o sobě -> itself." },
-        { t: "“I will go ________,” said the man.", o: ["herself", "themselves", "himself", "yourself"], a: 2, h: "On (muž) půjde sám -> himself." },
-        { t: "The building ________ was destroyed has been rebuilt.", o: ["which", "who", "whom", "whose"], a: 0, h: "Budova (věc) -> which." },
-        { t: "“Did you find ________?” asked the woman.", o: ["they", "it", "he", "we"], a: 1, h: "Našla jsi 'to' (věc) -> it." },
-        { t: "The lady ________ husband is a pilot travels a lot.", o: ["who", "whom", "which", "whose"], a: 3, h: "Dáma, jejíž manžel -> whose." },
-        { t: "“We must behave ________,” said the mother to her children.", o: ["himself", "herself", "ourselves", "yourselves"], a: 3, h: "Matka mluví k dětem: Vy (všichni) se musíte chovat slušně -> yourselves." },
-        { t: "The people ________ live next door are very friendly.", o: ["which", "who", "whom", "whose"], a: 1, h: "Lidé, kteří -> who." },
-        { t: "“Is this ________ notebook?” asked the student.", o: ["your", "you", "mine", "yours"], a: 0, h: "Tvůj sešit -> your." },
-        { t: "“Tell ________ the story,” said the child.", o: ["he", "they", "her", "I"], a: 2, h: "Řekni 'jí' (předmět) -> her." },
-        { t: "The river ________ flows through the city is very polluted.", o: ["who", "whom", "which", "whose"], a: 2, h: "Řeka (věc) -> which." }
+        { t: "The computer ________ is a useless machine.", o: ["herself", "themselves", "yourself", "itself"], a: 3, h: "Computer -> itself." },
+        { t: "“I will go ________,” said the man.", o: ["herself", "themselves", "himself", "yourself"], a: 2, h: "He -> himself." },
+        { t: "The building ________ was destroyed was rebuilt.", o: ["which", "who", "whom", "whose"], a: 0, h: "Building -> which." },
+        { t: "“Did you find ________?” asked the woman.", o: ["they", "it", "he", "we"], a: 1, h: "It." },
+        { t: "The lady ________ husband is a pilot travels a lot.", o: ["who", "whom", "which", "whose"], a: 3, h: "Whose husband." },
+        { t: "“We must behave ________,” said the mother to her children.", o: ["himself", "herself", "ourselves", "yourselves"], a: 3, h: "You (plural) -> yourselves." },
+        { t: "The people ________ live next door are friendly.", o: ["which", "who", "whom", "whose"], a: 1, h: "Who." },
+        { t: "“Is this ________ notebook?”", o: ["your", "you", "mine", "yours"], a: 0, h: "Your notebook." },
+        { t: "“Tell ________ the story,” said the child.", o: ["he", "they", "her", "I"], a: 2, h: "Tell her." },
+        { t: "The river ________ flows through the city is polluted.", o: ["who", "whom", "which", "whose"], a: 2, h: "River -> which." }
     ], score: null },
     { id: 11, section: 'adverbs', title: "Exercise 11: Adverbs", questions: [
-        { t: "You will be fired if you are ________ absent from work.", o: ["seldom", "rarely", "barely", "often"], a: 3, h: "Výpověď hrozí, když chybíš ČASTO -> often." },
-        { t: "It is wrong to steal. You must ________ do it again.", o: ["seldom", "rarely", "hardly", "never"], a: 3, h: "NESMÍŠ to udělat NIKDY -> never." },
-        { t: "My grandmother is ________ ill. She has to be taken to hospital.", o: ["rarely", "hardly", "seriously", "barely"], a: 2, h: "VÁŽNĚ nemocná -> seriously." },
-        { t: "To cross the road ________, you must use the overhead bridge.", o: ["safely", "bravely", "fiercely", "dangerously"], a: 0, h: "Přejít BEZPEČNĚ -> safely." },
-        { t: "When my brother had his tonsils removed, he could ________ swallow.", o: ["easily", "hardly", "luckily", "sibilantly"], a: 1, h: "STĚŽÍ mohl polykat -> hardly." },
-        { t: "The soldiers fought ________ and won the battle.", o: ["bravely", "cowardly", "slowly", "weakly"], a: 0, h: "Bojovali STATEČNĚ -> bravely." },
-        { t: "The wind blew so ________ that several trees were uprooted.", o: ["softly", "gently", "strongly", "weakly"], a: 2, h: "Vítr foukal SILNĚ -> strongly." },
-        { t: "My sister speaks so ________ that I can hardly hear her.", o: ["loudly", "softly", "clearly", "quickly"], a: 1, h: "Mluví POTICHU -> softly." },
-        { t: "The tortoise moves ________ across the field.", o: ["fast", "quickly", "slowly", "rapidly"], a: 2, h: "Želva leze POMALU -> slowly." },
-        { t: "The children played ________ in the park.", o: ["sadly", "happily", "angrily", "quietly"], a: 1, h: "Hrály si ŠŤASTNĚ -> happily." }
+        { t: "You will be fired if you are ________ absent.", o: ["seldom", "rarely", "barely", "often"], a: 3, h: "often." },
+        { t: "It is wrong to steal. You must ________ do it again.", o: ["seldom", "rarely", "hardly", "never"], a: 3, h: "never." },
+        { t: "My grandmother is ________ ill.", o: ["rarely", "hardly", "seriously", "barely"], a: 2, h: "seriously." },
+        { t: "To cross the road ________, use the bridge.", o: ["safely", "bravely", "fiercely", "dangerously"], a: 0, h: "safely." },
+        { t: "He could ________ swallow.", o: ["easily", "hardly", "luckily", "sibilantly"], a: 1, h: "hardly." },
+        { t: "The soldiers fought ________.", o: ["bravely", "cowardly", "slowly", "weakly"], a: 0, h: "bravely." },
+        { t: "The wind blew so ________.", o: ["softly", "gently", "strongly", "weakly"], a: 2, h: "strongly." },
+        { t: "My sister speaks so ________ I can hardly hear.", o: ["loudly", "softly", "clearly", "quickly"], a: 1, h: "softly." },
+        { t: "The tortoise moves ________.", o: ["fast", "quickly", "slowly", "rapidly"], a: 2, h: "slowly." },
+        { t: "The children played ________ in the park.", o: ["sadly", "happily", "angrily", "quietly"], a: 1, h: "happily." }
     ], score: null },
     { id: 12, section: 'adverbs', title: "Exercise 12: Adverbs", questions: [
-        { t: "The students behaved ________ during the field trip.", o: ["badly", "well", "good", "rough"], a: 1, h: "Chovali se DOBŘE (příslovce) -> well." },
-        { t: "She speaks English ________ after living in London for five years.", o: ["fluently", "fluent", "slow", "bad"], a: 0, h: "Mluví PLYNULE -> fluently." },
-        { t: "It rained ________ all through the night.", o: ["lightly", "heavily", "softly", "gently"], a: 1, h: "Pršelo HODNĚ (silně) -> heavily." },
-        { t: "You should drive ________ when the roads are slippery.", o: ["fast", "carefully", "careless", "quick"], a: 1, h: "Řídit OPATRNĚ -> carefully." },
-        { t: "The thief entered the house ________ so as not to wake anyone up.", o: ["loudly", "noisily", "quietly", "quickly"], a: 2, h: "Vstoupil POTICHU -> quietly." },
-        { t: "He solved the difficult math problem ________.", o: ["easily", "hard", "difficult", "slow"], a: 0, h: "Vyřešil to SNADNO -> easily." },
-        { t: "The sun is shining ________ today.", o: ["brightly", "dimly", "softly", "weakly"], a: 0, h: "Slunce svítí JASNĚ -> brightly." },
-        { t: "She waited ________ for her turn to see the doctor.", o: ["impatiently", "patiently", "quick", "fast"], a: 1, h: "Čekala TRPĚLIVĚ -> patiently." },
-        { t: "The dog barked ________ at the stranger.", o: ["softly", "quietly", "loudly", "gently"], a: 2, h: "Pes štěkal NAHLAS -> loudly." },
-        { t: "He finished his homework ________ so he could go out to play.", o: ["slowly", "quickly", "lazy", "late"], a: 1, h: "Dokončil úkol RYCHLE -> quickly." }
+        { t: "The students behaved ________ during the trip.", o: ["badly", "well", "good", "rough"], a: 1, h: "well." },
+        { t: "She speaks English ________ after living in London.", o: ["fluently", "fluent", "slow", "bad"], a: 0, h: "fluently." },
+        { t: "It rained ________ through the night.", o: ["lightly", "heavily", "softly", "gently"], a: 1, h: "heavily." },
+        { t: "Drive ________ when roads are slippery.", o: ["fast", "carefully", "careless", "quick"], a: 1, h: "carefully." },
+        { t: "The thief entered ________ not to wake anyone.", o: ["loudly", "noisily", "quietly", "quickly"], a: 2, h: "quietly." },
+        { t: "He solved the math problem ________.", o: ["easily", "hard", "difficult", "slow"], a: 0, h: "easily." },
+        { t: "The sun is shining ________ today.", o: ["brightly", "dimly", "softly", "weakly"], a: 0, h: "brightly." },
+        { t: "She waited ________ for her turn.", o: ["impatiently", "patiently", "quick", "fast"], a: 1, h: "patiently." },
+        { t: "The dog barked ________ at the stranger.", o: ["softly", "quietly", "loudly", "gently"], a: 2, h: "loudly." },
+        { t: "He finished homework ________ to go play.", o: ["slowly", "quickly", "lazy", "late"], a: 1, h: "quickly." }
     ], score: null },
     { id: 13, section: 'adverbs', title: "Exercise 13: Adverbs", questions: [
-        { t: "The passengers waited ________ for the delayed flight.", o: ["anxiously", "happily", "excitedly", "calmly"], a: 0, h: "Čekali ÚZKOSTNĚ (v obavách) -> anxiously." },
-        { t: "The teacher shouted ________ at the noisy students.", o: ["softly", "gently", "angrily", "kindly"], a: 2, h: "Křičel NAŠTVANĚ -> angrily." },
-        { t: "He works ________ to support his large family.", o: ["hardly", "hard", "lazy", "slow"], a: 1, h: "Pracuje TVRDĚ -> hard." },
-        { t: "The ballerina danced ________ on the stage.", o: ["gracefully", "clumsily", "heavily", "noisily"], a: 0, h: "Tančila ELEGANTNĚ (půvabně) -> gracefully." },
-        { t: "Write your name ________ at the top of the paper.", o: ["messy", "neatly", "dirty", "careless"], a: 1, h: "Napiš to ČITELNĚ (úhledně) -> neatly." },
-        { t: "The fire spread ________ through the dry forest.", o: ["slowly", "rapidly", "gradually", "softly"], a: 1, h: "Oheň se šířil RYCHLE -> rapidly." },
-        { t: "She smiled ________ when she received the flowers.", o: ["sadly", "sweetly", "angrily", "meanly"], a: 1, h: "Usmála se SLADCE (mile) -> sweetly." },
-        { t: "The old man walked ________ down the street.", o: ["quickly", "fast", "shakily", "strongly"], a: 2, h: "Šel ROZTŘESENĚ -> shakily." },
-        { t: "The bird sang ________ on the branch.", o: ["beautifully", "terribly", "loudly", "noisily"], a: 0, h: "Zpíval KRÁSNĚ -> beautifully." },
-        { t: "You must answer the questions ________.", o: ["correctly", "wrong", "false", "bad"], a: 0, h: "Musíš odpovědět SPRÁVNĚ -> correctly." }
+        { t: "The passengers waited ________ for the flight.", o: ["anxiously", "happily", "excitedly", "calmly"], a: 0, h: "anxiously." },
+        { t: "The teacher shouted ________ at noisy students.", o: ["softly", "gently", "angrily", "kindly"], a: 2, h: "angrily." },
+        { t: "He works ________ to support his family.", o: ["hardly", "hard", "lazy", "slow"], a: 1, h: "hard." },
+        { t: "The ballerina danced ________.", o: ["gracefully", "clumsily", "heavily", "noisily"], a: 0, h: "gracefully." },
+        { t: "Write your name ________ at the top.", o: ["messy", "neatly", "dirty", "careless"], a: 1, h: "neatly." },
+        { t: "The fire spread ________.", o: ["slowly", "rapidly", "gradually", "softly"], a: 1, h: "rapidly." },
+        { t: "She smiled ________ when she got flowers.", o: ["sadly", "sweetly", "angrily", "meanly"], a: 1, h: "sweetly." },
+        { t: "The old man walked ________ down the street.", o: ["quickly", "fast", "shakily", "strongly"], a: 2, h: "shakily." },
+        { t: "The bird sang ________ on the branch.", o: ["beautifully", "terribly", "loudly", "noisily"], a: 0, h: "beautifully." },
+        { t: "You must answer the questions ________.", o: ["correctly", "wrong", "false", "bad"], a: 0, h: "correctly." }
     ], score: null },
     { id: 14, section: 'revision', title: "Exercise 14: Revision", questions: [
-        { t: "This is the house ________ my grandfather built many years ago.", o: ["who", "whom", "which", "whose"], a: 2, h: "Mluvíme o domě (věc) -> which." },
-        { t: "The students ________ were late for school had to stay back.", o: ["which", "who", "whom", "whose"], a: 1, h: "Studenti (lidé), kteří něco udělali -> who." },
-        { t: "“Is this ________ book?” asked the teacher.", o: ["your", "yours", "you", "mine"], a: 0, h: "Tvoje kniha (před podstatným jménem) -> your." },
-        { t: "The cat licked ________ paws after finishing the bowl of milk.", o: ["it", "its", "it's", "them"], a: 1, h: "Její (kočky) tlapky -> its." },
-        { t: "My mother and ________ went to the market early this morning.", o: ["me", "I", "us", "they"], a: 1, h: "Podmět věty (kdo tam šel) -> I." },
-        { t: "The man ________ car was stolen is at the police station.", o: ["who", "whom", "which", "whose"], a: 3, h: "Muž, jehož auto -> whose." },
-        { t: "She did the entire project by ________.", o: ["herself", "himself", "myself", "yourself"], a: 0, h: "Ona sama to udělala -> herself." },
-        { t: "The cake was ________ delicious that everyone wanted a second piece.", o: ["very", "so", "too", "enough"], a: 1, h: "Byl TAK dobrý -> so delicious." },
-        { t: "He ran ________ to catch the last bus home.", o: ["slow", "fast", "quick", "rapidly"], a: 1, h: "Běžel rychle -> fast." },
-        { t: "The dress ________ she is wearing is very expensive.", o: ["who", "whose", "which", "whom"], a: 2, h: "Šaty (věc) -> which." }
+        { t: "This is the house ________ my grandfather built.", o: ["who", "whom", "which", "whose"], a: 2, h: "which." },
+        { t: "The students ________ were late had detention.", o: ["which", "who", "whom", "whose"], a: 1, h: "who." },
+        { t: "“Is this ________ book?” asked the teacher.", o: ["your", "yours", "you", "mine"], a: 0, h: "your." },
+        { t: "The cat licked ________ paws.", o: ["it", "its", "it's", "them"], a: 1, h: "its." },
+        { t: "My mother and ________ went to the market.", o: ["me", "I", "us", "they"], a: 1, h: "I." },
+        { t: "The man ________ car was stolen is at the station.", o: ["who", "whom", "which", "whose"], a: 3, h: "whose." },
+        { t: "She did the project by ________.", o: ["herself", "himself", "myself", "yourself"], a: 0, h: "herself." },
+        { t: "The cake was ________ delicious that everyone wanted more.", o: ["very", "so", "too", "enough"], a: 1, h: "so." },
+        { t: "He ran ________ to catch the bus.", o: ["slow", "fast", "quick", "rapidly"], a: 1, h: "fast." },
+        { t: "The dress ________ she is wearing is expensive.", o: ["who", "whose", "which", "whom"], a: 2, h: "which." }
     ], score: null },
     { id: 15, section: 'revision', title: "Exercise 15: Revision", questions: [
-        { t: "The person ________ you need to see is currently in a meeting.", o: ["who", "whom", "which", "whose"], a: 1, h: "Člověk, koho (předmět) potřebuješ vidět -> whom." },
-        { t: "“I don't have my pen. Can I borrow ________?” asked Sarah.", o: ["your", "yours", "you", "mine"], a: 1, h: "Půjčit si tvoji (samostatně) -> yours." },
-        { t: "The dog wagged ________ tail when its owner returned home.", o: ["its", "it's", "it", "their"], a: 0, h: "Jeho (psův) ocas -> its." },
-        { t: "My friends and ________ are planning a surprise party for Jane.", o: ["me", "I", "us", "them"], a: 1, h: "Podmět (my a já) -> I." },
-        { t: "The building ________ was destroyed in the fire has been rebuilt.", o: ["who", "whose", "whom", "which"], a: 3, h: "Budova (věc) -> which." },
-        { t: "He hurt ________ while he was playing football.", o: ["himself", "herself", "itself", "themselves"], a: 0, h: "On se zranil -> himself." },
-        { t: "The woman ________ son is a famous actor is visiting us today.", o: ["who", "whom", "which", "whose"], a: 3, h: "Žena, jejíž syn -> whose." },
-        { t: "She sang ________ during the school concert.", o: ["beautiful", "beautifully", "beauty", "beautify"], a: 1, h: "Zpívala jak? (příslovce) -> beautifully." },
-        { t: "This is the ________ book I have ever read.", o: ["good", "better", "best", "goodest"], a: 2, h: "Nejlepší kniha (3. stupeň) -> best." },
-        { t: "The computer ________ I bought yesterday is very fast.", o: ["who", "whom", "which", "whose"], a: 2, h: "Počítač (věc) -> which." }
+        { t: "The person ________ you need to see is in a meeting.", o: ["who", "whom", "which", "whose"], a: 1, h: "whom." },
+        { t: "“I borrow ________?” asked Sarah.", o: ["your", "yours", "you", "mine"], a: 1, h: "yours." },
+        { t: "The dog wagged ________ tail.", o: ["its", "it's", "it", "their"], a: 0, h: "its." },
+        { t: "My friends and ________ are planning a party.", o: ["me", "I", "us", "them"], a: 1, h: "I." },
+        { t: "The building ________ was destroyed was rebuilt.", o: ["who", "whose", "whom", "which"], a: 3, h: "which." },
+        { t: "He hurt ________ playing football.", o: ["himself", "herself", "itself", "themselves"], a: 0, h: "himself." },
+        { t: "The woman ________ son is an actor is visiting.", o: ["who", "whom", "which", "whose"], a: 3, h: "whose." },
+        { t: "She sang ________ during the concert.", o: ["beautiful", "beautifully", "beauty", "beautify"], a: 1, h: "beautifully." },
+        { t: "This is the ________ book I read.", o: ["good", "better", "best", "goodest"], a: 2, h: "best." },
+        { t: "The computer ________ I bought is fast.", o: ["who", "whom", "which", "whose"], a: 2, h: "which." }
     ], score: null },
     { id: 16, section: 'revision', title: "Exercise 16: Revision", questions: [
-        { t: "The student ________ won the scholarship is extremely hardworking.", o: ["who", "whom", "which", "whose"], a: 0, h: "Student, který (podmět) vyhrál -> who." },
-        { t: "“Is this ________ umbrella?” asked the stranger.", o: ["your", "you", "yours", "mine"], a: 0, h: "Tvoje (před podstatným jménem) -> your." },
-        { t: "The tree lost all ________ leaves during the storm.", o: ["its", "it's", "it", "their"], a: 0, h: "Jeho (stromu) listy -> its." },
-        { t: "Jack and ________ went fishing at the lake last weekend.", o: ["me", "I", "us", "him"], a: 1, h: "Podmět (Jack a já) -> I." },
-        { t: "The movie ________ we watched last night was quite boring.", o: ["who", "whose", "whom", "which"], a: 3, h: "Film (věc) -> which." },
-        { t: "We should learn to take care of ________.", o: ["himself", "ourselves", "themselves", "herself"], a: 1, h: "My o sebe -> ourselves." },
-        { t: "The boy ________ bicycle was stolen is very upset.", o: ["who", "whom", "which", "whose"], a: 3, h: "Kluk, jehož kolo -> whose." },
-        { t: "He answered the difficult questions ________.", o: ["correct", "correctly", "correction", "corrected"], a: 1, h: "Odpověděl jak? (příslovce) -> correctly." },
-        { t: "She is the ________ girl in the entire school.", o: ["pretty", "prettier", "prettiest", "most pretty"], a: 2, h: "Nejhezčí (3. stupeň) -> prettiest." },
-        { t: "The car ________ he is driving belongs to his father.", o: ["who", "whose", "which", "whom"], a: 2, h: "Auto (věc) -> which." }
+        { t: "The student ________ won is hardworking.", o: ["who", "whom", "which", "whose"], a: 0, h: "who." },
+        { t: "“Is this ________ umbrella?” asked the stranger.", o: ["your", "you", "yours", "mine"], a: 0, h: "your." },
+        { t: "The tree lost all ________ leaves.", o: ["its", "it's", "it", "their"], a: 0, h: "its." },
+        { t: "Jack and ________ went fishing.", o: ["me", "I", "us", "him"], a: 1, h: "I." },
+        { t: "The movie ________ we watched was boring.", o: ["who", "whose", "whom", "which"], a: 3, h: "which." },
+        { t: "We should take care of ________.", o: ["himself", "ourselves", "themselves", "herself"], a: 1, h: "ourselves." },
+        { t: "The boy ________ bicycle was stolen is upset.", o: ["who", "whom", "which", "whose"], a: 3, h: "whose." },
+        { t: "He answered the questions ________.", o: ["correct", "correctly", "correction", "corrected"], a: 1, h: "correctly." },
+        { t: "She is the ________ girl in school.", o: ["pretty", "prettier", "prettiest", "most pretty"], a: 2, h: "prettiest." },
+        { t: "The car ________ he is driving belongs to his father.", o: ["who", "whose", "which", "whom"], a: 2, h: "which." }
     ], score: null },
     { id: 17, section: 'revision', title: "Exercise 17: Revision", questions: [
-        { t: "The doctor ________ treated my father is very experienced.", o: ["who", "whom", "which", "whose"], a: 0, h: "Doktor, který léčil -> who." },
-        { t: "“This is not my bag. It must be ________,” said Peter.", o: ["her", "hers", "she", "mine"], a: 1, h: "Její (samostatně stojící) -> hers." },
-        { t: "The bird built ________ nest high up in the tree.", o: ["its", "it's", "it", "their"], a: 0, h: "Jeho (ptačí) hnízdo -> its." },
-        { t: "My brother and ________ enjoyed the concert very much.", o: ["me", "I", "us", "they"], a: 1, h: "Podmět (bratr a já) -> I." },
-        { t: "The book ________ I am reading is very interesting.", o: ["who", "whose", "whom", "which"], a: 3, h: "Kniha (věc) -> which." },
-        { t: "The children enjoyed ________ at the amusement park.", o: ["himself", "ourselves", "themselves", "herself"], a: 2, h: "Děti (oni) se bavily -> themselves." },
-        { t: "The teacher ________ students won the competition was very proud.", o: ["who", "whom", "which", "whose"], a: 3, h: "Učitelka, jejíž studenti -> whose." },
-        { t: "She speaks French ________.", o: ["fluent", "fluently", "fluency", "fluented"], a: 1, h: "Mluví jak? (příslovce) -> fluently." },
-        { t: "He is ________ than his older brother.", o: ["tall", "taller", "tallest", "more tall"], a: 1, h: "Srovnání (2. stupeň) -> taller." },
-        { t: "The house ________ they live in is very large.", o: ["who", "whose", "which", "whom"], a: 2, h: "Dům (věc) -> which." }
+        { t: "The doctor ________ treated my father is experienced.", o: ["who", "whom", "which", "whose"], a: 0, h: "who." },
+        { t: "“It must be ________,” said Peter.", o: ["her", "hers", "she", "mine"], a: 1, h: "hers." },
+        { t: "The bird built ________ nest high up.", o: ["its", "it's", "it", "their"], a: 0, h: "its." },
+        { t: "My brother and ________ enjoyed the concert.", o: ["me", "I", "us", "they"], a: 1, h: "I." },
+        { t: "The book ________ I am reading is interesting.", o: ["who", "whose", "whom", "which"], a: 3, h: "which." },
+        { t: "Children enjoyed ________ at the park.", o: ["himself", "ourselves", "themselves", "herself"], a: 2, h: "themselves." },
+        { t: "The teacher ________ students won was proud.", o: ["who", "whom", "which", "whose"], a: 3, h: "whose." },
+        { t: "She speaks French ________.", o: ["fluent", "fluently", "fluency", "fluented"], a: 1, h: "fluently." },
+        { t: "He is ________ than his brother.", o: ["tall", "taller", "tallest", "more tall"], a: 1, h: "taller." },
+        { t: "The house ________ they live in is large.", o: ["who", "whose", "which", "whom"], a: 2, h: "which." }
     ], score: null },
     { id: 18, section: 'revision', title: "Exercise 18: Revision", questions: [
-        { t: "The man ________ the police are looking for escaped.", o: ["who", "whom", "which", "whose"], a: 1, h: "Vztažné zájmeno v předmětu (koho hledají) -> whom." },
-        { t: "Victoria gave the man ________ had come up to her a dollar.", o: ["whom", "who", "which", "whose"], a: 1, h: "Vztažné zájmeno v podmětu (kdo přišel) -> who." },
-        { t: "Take the ________ packet of rice.", o: ["small", "as small", "smallest", "smaller"], a: 0, h: "Základní stupeň přídavného jména -> small." },
-        { t: "On Christmas Day, my family and ________ go to church.", o: ["they", "me", "I", "us"], a: 2, h: "Podmět věty (kdo tam jde) -> I." },
-        { t: "The prefect let Peter and ________ in.", o: ["me", "I", "her", "they"], a: 0, h: "Po slovesu 'let' používáme předmětový tvar -> me." },
-        { t: "“Once the time starts, ________ have only thirty seconds,”", o: ["I", "we", "you", "they"], a: 2, h: "Mluví k soutěžícím (vy) -> you." },
-        { t: "The creaking sound ________ you had heard earlier...", o: ["which", "whom", "whose", "who"], a: 0, h: "Pro věci a zvuky používáme which." },
-        { t: "Nobody could imitate the magician’s illusions. They were ________ amazing.", o: ["strongly", "truly", "fairly", "adequately"], a: 1, h: "Skutečně (příslovce zdůraznění) -> truly." },
-        { t: "Everyone watched... as the station had ________ shown the public life in palace.", o: ["never", "seldom", "rarely", "once"], a: 0, h: "Nikdy předtím neukázali -> never." },
-        { t: "The older you get, the ________ it is to find work.", o: ["difficult", "more difficult", "most difficult", "as difficult"], a: 1, h: "Srovnání (čím starší, tím TĚŽŠÍ) -> more difficult." }
+        { t: "The man ________ police are looking for escaped.", o: ["who", "whom", "which", "whose"], a: 1, h: "whom." },
+        { t: "The man ________ had come up was Victoria's friend.", o: ["whom", "who", "which", "whose"], a: 1, h: "who." },
+        { t: "Take the ________ packet of rice.", o: ["small", "as small", "smallest", "smaller"], a: 0, h: "small." },
+        { t: "My family and ________ go to church.", o: ["they", "me", "I", "us"], a: 2, h: "I." },
+        { t: "The prefect let Peter and ________ in.", o: ["me", "I", "her", "they"], a: 0, h: "me." },
+        { t: "“________ have only 30 seconds,” said the host.", o: ["I", "we", "you", "they"], a: 2, h: "you." },
+        { t: "The sound ________ you had heard was scary.", o: ["which", "whom", "whose", "who"], a: 0, h: "which." },
+        { t: "They were ________ amazing.", o: ["strongly", "truly", "fairly", "adequately"], a: 1, h: "truly." },
+        { t: "The station had ________ shown the public life.", o: ["never", "seldom", "rarely", "once"], a: 0, h: "never." },
+        { t: "The older you get, the ________ it is.", o: ["difficult", "more difficult", "most difficult", "as difficult"], a: 1, h: "more difficult." }
     ], score: null }
 ];
 
-allEx.sort((a,b) => a.id - b.id);
+let currentExIdx = 0;
+let currentSec = 'pronouns';
 
-let curIdx = 0;
-function changeSection(sec) {
+function changeSection(s) {
+    currentSec = s;
     document.querySelectorAll('.sec-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('sec-' + sec).classList.add('active');
-    document.getElementById('quiz-view').style.display = 'block';
-    document.getElementById('check-area').style.display = 'block';
-    document.getElementById('exercise-nav').style.display = 'flex';
+    document.getElementById('sec-'+s).classList.add('active');
     document.getElementById('dashboard-view').style.display = 'none';
-    renderNav(sec);
-    showEx(allEx.findIndex(e => e.section === sec));
+    document.getElementById('quiz-area').style.display = 'block';
+    document.getElementById('check-btn-area').style.display = 'block';
+    document.getElementById('exercise-nav').style.display = 'flex';
+    renderSelector();
+    showEx(allExercises.findIndex(e => e.section === s));
 }
-function renderNav(sec) {
-    const nav = document.getElementById('exercise-nav'); nav.innerHTML = '';
-    allEx.forEach((ex, i) => {
-        if (ex.section === sec) {
+
+function renderSelector() {
+    const nav = document.getElementById('exercise-nav');
+    nav.innerHTML = '';
+    allExercises.forEach((ex, i) => {
+        if(ex.section === currentSec) {
             const b = document.createElement('button');
-            b.className = `ex-btn ${i === curIdx ? 'active' : ''} ${ex.score !== null ? 'done' : ''}`;
-            b.textContent = ex.id; b.onclick = () => showEx(i);
+            b.className = `ex-btn ${i === currentExIdx ? 'active' : ''} ${ex.score !== null ? 'done' : ''}`;
+            b.textContent = ex.id;
+            b.onclick = () => showEx(i);
             nav.appendChild(b);
         }
     });
 }
-function showEx(idx) {
-    curIdx = idx; renderNav(allEx[idx].section);
-    const area = document.getElementById('quiz-view'); const ex = allEx[idx];
+
+function showEx(i) {
+    currentExIdx = i;
+    renderSelector();
+    const area = document.getElementById('quiz-area');
+    const ex = allExercises[i];
     area.innerHTML = `<h2>${ex.title}</h2>`;
     ex.questions.forEach((q, qi) => {
-        area.innerHTML += `<div class="question-card" id="card-${idx}-${qi}">
-            <button class="hint-btn" onclick="toggleHint(${idx},${qi})">Hint 💡</button>
-            <div class="q-text">${qi+1}. ${q.t}</div>
-            <div class="hint-box" id="hint-${idx}-${qi}">${q.h}</div>
-            <div class="options">${q.o.map((o, oi) => `<label><input type="radio" name="e${idx}q${qi}" value="${oi}"> ${o}</label>`).join('')}</div>
-            <div class="feedback" id="feed-${idx}-${qi}"></div></div>`;
+        area.innerHTML += `
+            <div class="question-card" id="card-${i}-${qi}">
+                <button class="hint-btn" onclick="toggleHint(${i},${qi})">Hint 💡</button>
+                <div class="q-text">${qi+1}. ${q.t}</div>
+                <div class="hint-box" id="hint-${i}-${qi}">${q.h}</div>
+                <div class="options">
+                    ${q.o.map((opt, oi) => `<label><input type="radio" name="ex${i}q${qi}" value="${oi}"> ${opt}</label>`).join('')}
+                </div>
+                <div class="feedback" id="feed-${i}-${qi}"></div>
+            </div>`;
     });
 }
-function toggleHint(e, q) {
-    const h = document.getElementById(`hint-${e}-${q}`);
+
+function toggleHint(i, qi) {
+    const h = document.getElementById(`hint-${i}-${qi}`);
     h.style.display = h.style.display === 'block' ? 'none' : 'block';
 }
-function checkAll() {
-    const ex = allEx[curIdx]; let s = 0;
+
+function checkEx() {
+    const ex = allExercises[currentExIdx];
+    let s = 0;
     ex.questions.forEach((q, qi) => {
-        const sel = document.querySelector(`input[name="e${curIdx}q${qi}"]:checked`);
-        const feed = document.getElementById(`feed-${curIdx}-${qi}`);
-        const card = document.getElementById(`card-${curIdx}-${qi}`);
+        const sel = document.querySelector(`input[name="ex${currentExIdx}q${qi}"]:checked`);
+        const feed = document.getElementById(`feed-${currentExIdx}-${qi}`);
+        const card = document.getElementById(`card-${currentExIdx}-${qi}`);
         feed.style.display = 'block';
-        if (sel && parseInt(sel.value) === q.a) {
-            s++; card.style.borderColor = 'var(--success)'; feed.innerHTML = '✅ Correct!'; feed.style.color = 'var(--success)';
+        if(sel && parseInt(sel.value) === q.a) {
+            s++;
+            card.style.borderColor = 'var(--success)';
+            feed.innerHTML = "✅ Correct!";
+            feed.style.color = "var(--success)";
         } else {
-            card.style.borderColor = 'var(--error)'; feed.innerHTML = `❌ Correct: ${q.o[q.a]}`; feed.style.color = 'var(--error)';
+            card.style.borderColor = 'var(--error)';
+            feed.innerHTML = `❌ Wrong! Correct is: ${q.o[q.a]}`;
+            feed.style.color = "var(--error)";
         }
     });
-    ex.score = s; renderNav(ex.section);
+    ex.score = s;
+    renderSelector();
 }
+
 function showDashboard() {
-    document.getElementById('quiz-view').style.display = 'none';
-    document.getElementById('check-area').style.display = 'none';
+    document.getElementById('quiz-area').style.display = 'none';
+    document.getElementById('check-btn-area').style.display = 'none';
     document.getElementById('exercise-nav').style.display = 'none';
-    const view = document.getElementById('dashboard-view'); view.style.display = 'block';
-    const grid = document.getElementById('dash-grid'); grid.innerHTML = '';
+    const view = document.getElementById('dashboard-view');
+    view.style.display = 'block';
+    
+    const grid = document.getElementById('dash-grid');
+    grid.innerHTML = '';
     let total = 0;
-    allEx.forEach(ex => {
-        grid.innerHTML += `<div class="stat-card ${ex.score >= 8 ? 'good' : ''}"><strong>Ex ${ex.id}</strong><br>${ex.score !== null ? ex.score : '-'} / 10</div>`;
+    allExercises.forEach(ex => {
+        const card = document.createElement('div');
+        card.className = `stat-card ${ex.score >= 8 ? 'good' : ''}`;
+        card.innerHTML = `<strong>Ex ${ex.id}</strong><br>${ex.score !== null ? ex.score : '-'} / 10`;
+        grid.appendChild(card);
         total += (ex.score || 0);
     });
-    if (allEx.every(e => e.score !== null)) {
+    
+    if(allExercises.every(e => e.score !== null)) {
         document.getElementById('certificate').style.display = 'block';
-        document.getElementById('total-score-text').textContent = `Total: ${total} / 180`;
+        document.getElementById('total-score-text').textContent = `Total Score: ${total} / 180`;
     }
 }
+
+// Start app
 changeSection('pronouns');
 </script>
 </body>
