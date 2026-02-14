@@ -281,29 +281,45 @@ const allExercises = [
         { t: "The older you get, the ________ it is to find work.", o: ["difficult", "more difficult", "most difficult", "as difficult"], a: 1, h: "Srovnáváme (čím starší, tím TĚŽŠÍ) -> 'the more difficult'." }
     ], score: null }
 ];
+// --- TADY ZAČÍNÁ OPRAVENÁ ČÁST ---
 
-let currentExIdx = 0;
-let currentSec = 'pronouns';
+// Seřadíme cvičení, aby šla hezky za sebou
+allExercises.sort((a, b) => a.id - b.id);
 
-function changeSection(s) {
-    currentSec = s;
+let currentIdx = 0;
+
+// Funkce pro přepínání sekcí (Pronouns / Adverbs / Revision)
+function changeSection(sec) {
+    // Odbarvíme staré tlačítko a vybarvíme nové
     document.querySelectorAll('.sec-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('sec-'+s).classList.add('active');
-    document.getElementById('dashboard-view').style.display = 'none';
-    document.getElementById('quiz-area').style.display = 'block';
+    const activeBtn = document.getElementById('sec-' + sec) || document.getElementById('btn-' + sec);
+    if(activeBtn) activeBtn.classList.add('active');
+
+    // Přepneme viditelnost oken
+    document.getElementById('quiz-view').style.display = 'block';
     document.getElementById('check-btn-area').style.display = 'block';
+    if(document.getElementById('content-area')) document.getElementById('content-area').style.display = 'block';
+    document.getElementById('dashboard-view').style.display = 'none';
+    if(document.getElementById('dashboard')) document.getElementById('dashboard').style.display = 'none';
+    
     document.getElementById('exercise-nav').style.display = 'flex';
-    renderSelector();
-    showEx(allExercises.findIndex(e => e.section === s));
+    if(document.getElementById('selector')) document.getElementById('selector').style.display = 'flex';
+
+    // Najdeme první cvičení v dané sekci a zobrazíme ho
+    const firstInSec = allExercises.findIndex(e => (e.section === sec || e.sec === sec));
+    if (firstInSec !== -1) showEx(firstInSec);
 }
 
+// Vytvoří kulatá tlačítka s čísly (1, 2, 3...)
 function renderSelector() {
-    const nav = document.getElementById('exercise-nav');
+    const nav = document.getElementById('exercise-nav') || document.getElementById('selector');
     nav.innerHTML = '';
+    const currentSectionType = allExercises[currentIdx].section || allExercises[currentIdx].sec;
+    
     allExercises.forEach((ex, i) => {
-        if(ex.section === currentSec) {
+        if ((ex.section === currentSectionType || ex.sec === currentSectionType)) {
             const b = document.createElement('button');
-            b.className = `ex-btn ${i === currentExIdx ? 'active' : ''} ${ex.score !== null ? 'done' : ''}`;
+            b.className = `ex-btn ${i === currentIdx ? 'active' : ''} ${ex.score !== null ? 'done' : ''}`;
             b.textContent = ex.id;
             b.onclick = () => showEx(i);
             nav.appendChild(b);
@@ -311,80 +327,105 @@ function renderSelector() {
     });
 }
 
-function showEx(i) {
-    currentExIdx = i;
+// Zobrazí konkrétních 10 otázek vybraného cvičení
+function showEx(idx) {
+    currentIdx = idx;
     renderSelector();
-    const area = document.getElementById('quiz-area');
-    const ex = allExercises[i];
+    const area = document.getElementById('quiz-view') || document.getElementById('quiz-area');
+    const ex = allExercises[idx];
     area.innerHTML = `<h2>${ex.title}</h2>`;
+    
     ex.questions.forEach((q, qi) => {
         area.innerHTML += `
-            <div class="question-card" id="card-${i}-${qi}">
-                <button class="hint-btn" onclick="toggleHint(${i},${qi})">Hint 💡</button>
-                <div class="q-text">${qi+1}. ${q.t}</div>
-                <div class="hint-box" id="hint-${i}-${qi}">${q.h}</div>
-                <div class="options">
-                    ${q.o.map((opt, oi) => `<label><input type="radio" name="ex${i}q${qi}" value="${oi}"> ${opt}</label>`).join('')}
+            <div class="question-card" id="card-${idx}-${qi}">
+                <button class="hint-btn" onclick="toggleHint(${idx},${qi})">Hint 💡</button>
+                <div class="q-text" style="font-size:1.2rem; font-weight:bold;">${qi + 1}. ${q.t}</div>
+                <div class="hint-box" id="hint-${idx}-${qi}" style="display:none; background:#fff9db; padding:10px; border-radius:8px; margin-top:10px; border-left:4px solid var(--secondary); font-style:italic;">${q.h}</div>
+                <div class="options" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:15px;">
+                    ${q.o.map((opt, oi) => `<label style="padding:10px; border:1px solid #eee; border-radius:10px; cursor:pointer; display:flex; align-items:center; gap:10px;">
+                        <input type="radio" name="e${idx}q${qi}" value="${oi}"> ${opt}
+                    </label>`).join('')}
                 </div>
-                <div class="feedback" id="feed-${i}-${qi}"></div>
+                <div id="feed-${idx}-${qi}" style="margin-top:10px; font-weight:bold; display:none;"></div>
             </div>`;
     });
 }
 
-function toggleHint(i, qi) {
-    const h = document.getElementById(`hint-${i}-${qi}`);
+function toggleHint(exIdx, qIdx) {
+    const h = document.getElementById(`hint-${exIdx}-${qIdx}`) || document.getElementById(`h-${exIdx}-${qIdx}`);
     h.style.display = h.style.display === 'block' ? 'none' : 'block';
 }
 
+// Opraví a vyhodnotí test
 function checkEx() {
-    const ex = allExercises[currentExIdx];
+    const ex = allExercises[currentIdx];
     let s = 0;
     ex.questions.forEach((q, qi) => {
-        const sel = document.querySelector(`input[name="ex${currentExIdx}q${qi}"]:checked`);
-        const feed = document.getElementById(`feed-${currentExIdx}-${qi}`);
-        const card = document.getElementById(`card-${currentExIdx}-${qi}`);
-        feed.style.display = 'block';
-        if(sel && parseInt(sel.value) === q.a) {
+        const sel = document.querySelector(`input[name="e${currentIdx}q${qi}"]:checked`);
+        const feed = document.getElementById(`feed-${currentIdx}-${qi}`);
+        const card = document.getElementById(`card-${currentIdx}-${qi}`) || document.getElementById(`q-${currentIdx}-${qi}`);
+        
+        if (feed) feed.style.display = 'block';
+        
+        if (sel && parseInt(sel.value) === q.a) {
             s++;
-            card.style.borderColor = 'var(--success)';
-            feed.innerHTML = "✅ Correct!";
-            feed.style.color = "var(--success)";
+            if(card) card.style.borderColor = 'var(--success)';
+            if(feed) { feed.innerHTML = "✅ Correct!"; feed.style.color = "var(--success)"; }
         } else {
-            card.style.borderColor = 'var(--error)';
-            feed.innerHTML = `❌ Wrong! Correct is: ${q.o[q.a]}`;
-            feed.style.color = "var(--error)";
+            if(card) card.style.borderColor = 'var(--error)';
+            if(feed) { feed.innerHTML = `❌ Wrong! Correct is: ${q.o[q.a]}`; feed.style.color = "var(--error)"; }
         }
     });
     ex.score = s;
     renderSelector();
+    alert(`Your score for Exercise ${ex.id}: ${s} / 10`);
 }
 
+// Stará se o zobrazení výsledků a certifikátu
 function showDashboard() {
-    document.getElementById('quiz-area').style.display = 'none';
-    document.getElementById('check-btn-area').style.display = 'none';
-    document.getElementById('exercise-nav').style.display = 'none';
-    const view = document.getElementById('dashboard-view');
-    view.style.display = 'block';
+    const quizArea = document.getElementById('quiz-view') || document.getElementById('quiz-area');
+    const checkArea = document.getElementById('check-btn-area');
+    const navArea = document.getElementById('exercise-nav') || document.getElementById('selector');
+    const dashView = document.getElementById('dashboard-view') || document.getElementById('dashboard');
+
+    if(quizArea) quizArea.style.display = 'none';
+    if(checkArea) checkArea.style.display = 'none';
+    if(navArea) navArea.style.display = 'none';
+    if(dashView) dashView.style.display = 'block';
     
-    const grid = document.getElementById('dash-grid');
+    const grid = document.getElementById('dash-grid') || document.getElementById('dashGrid');
     grid.innerHTML = '';
     let total = 0;
+    let completed = 0;
+
     allExercises.forEach(ex => {
         const card = document.createElement('div');
         card.className = `stat-card ${ex.score >= 8 ? 'good' : ''}`;
+        card.style = "padding:15px; background:#f9f9f9; border-radius:12px; text-align:center; border:2px solid #eee;";
+        if(ex.score >= 8) card.style.borderColor = "var(--success)";
+        
         card.innerHTML = `<strong>Ex ${ex.id}</strong><br>${ex.score !== null ? ex.score : '-'} / 10`;
         grid.appendChild(card);
-        total += (ex.score || 0);
+        if(ex.score !== null) {
+            total += ex.score;
+            completed++;
+        }
     });
     
-    if(allExercises.every(e => e.score !== null)) {
+    const scoreText = document.getElementById('total-score-text') || document.getElementById('final-stats');
+    if(scoreText) scoreText.textContent = `Total Score: ${total} / 180`;
+
+    if (completed === allExercises.length) {
         document.getElementById('certificate').style.display = 'block';
-        document.getElementById('total-score-text').textContent = `Total Score: ${total} / 180`;
     }
 }
 
-// Start app
+// Aby tlačítko "Check My Answers" fungovalo, i když se jmenuje jinak
+function grade() { checkEx(); }
+
+// Nastartování aplikace
 changeSection('pronouns');
+
 </script>
 </body>
 </html>
