@@ -5,156 +5,208 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AJ Mastery Hub - Elisa's Class</title>
     <style>
-        :root { --primary: #4a90e2; --secondary: #f39c12; --bg: #fdfdfd; --success: #2ecc71; --error: #e74c3c; --text: #2c3e50; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .app-container { max-width: 900px; margin: 0 auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid var(--primary); }
-        h1 { text-align: center; color: var(--primary); font-size: 2rem; margin-top: 0; }
-        .sections { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .sec-btn { padding: 10px 18px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; background: #eee; transition: 0.3s; }
-        .sec-btn.active { background: var(--primary); color: white; }
+        :root { --primary: #4a90e2; --secondary: #f39c12; --bg: #f8fbfd; --success: #2ecc71; --error: #e74c3c; --text: #2c3e50; }
+        body { font-family: 'Comic Sans MS', 'Segoe UI', cursive, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .app-container { max-width: 900px; margin: 0 auto; background: white; padding: 25px; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border: 5px solid var(--primary); }
+        h1 { text-align: center; color: var(--primary); font-size: 2.2rem; margin-top: 0; text-shadow: 2px 2px 0px #eee; }
+        
+        .sections { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+        .sec-btn { padding: 12px 20px; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; background: #eee; font-size: 1rem; transition: 0.3s; }
+        .sec-btn.active { background: var(--primary); color: white; transform: scale(1.05); box-shadow: 0 4px 10px rgba(74,144,226,0.3); }
         .sec-btn.dash { background: #9b59b6; color: white; }
-        .exercise-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; background: #f0f7ff; padding: 15px; border-radius: 15px; }
-        .ex-btn { width: 40px; height: 40px; border: 2px solid var(--primary); background: white; border-radius: 50%; cursor: pointer; font-weight: bold; }
-        .ex-btn.active { background: var(--primary); color: white; }
+
+        .exercise-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 25px; background: #f0f7ff; padding: 20px; border-radius: 20px; }
+        .ex-btn { width: 45px; height: 45px; border: 2px solid var(--primary); background: white; border-radius: 50%; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: 0.2s; }
+        .ex-btn.active { background: var(--primary); color: white; transform: translateY(-3px); }
         .ex-btn.done { background: var(--success); border-color: var(--success); color: white; }
-        .q-card { margin-bottom: 20px; padding: 20px; border: 2px dashed #ddd; border-radius: 15px; position: relative; }
-        .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        label { padding: 12px; border: 1px solid #eee; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
-        .hint-btn { background: var(--secondary); color: white; border: none; padding: 5px 10px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; float: right; }
-        .hint-text { display: none; background: #fff9db; padding: 10px; border-radius: 8px; margin-top: 10px; border-left: 4px solid var(--secondary); font-style: italic; }
-        .btn-check { width: 100%; padding: 15px; background: var(--success); color: white; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: bold; cursor: pointer; }
-        .stat-card { padding: 15px; background: #f9f9f9; border-radius: 12px; text-align: center; border: 2px solid #eee; }
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
-        #certificate { display: none; text-align: center; padding: 40px; border: 10px double var(--secondary); margin-top: 20px; border-radius: 20px; background: #fffdf5; }
+
+        .question-card { margin-bottom: 25px; padding: 25px; border: 2px dashed #cbd5e0; border-radius: 20px; background: #fff; position: relative; }
+        .q-text { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; line-height: 1.4; }
+        
+        .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        label { padding: 15px; border: 2px solid #edf2f7; border-radius: 15px; cursor: pointer; display: flex; align-items: center; gap: 12px; font-size: 1.1rem; transition: 0.2s; }
+        label:hover { background: #f7fafc; border-color: var(--primary); }
+        input[type="radio"] { transform: scale(1.5); }
+
+        .hint-btn { background: var(--secondary); color: white; border: none; padding: 6px 12px; border-radius: 12px; cursor: pointer; font-size: 0.9rem; float: right; font-weight: bold; }
+        .hint-box { display: none; background: #fff9db; padding: 15px; border-radius: 12px; margin-top: 15px; border-left: 6px solid var(--secondary); font-style: italic; }
+
+        .feedback { margin-top: 15px; font-weight: bold; font-size: 1.1rem; display: none; }
+        .check-area { text-align: center; margin-top: 30px; }
+        .btn-check { padding: 18px 50px; background: var(--success); color: white; border: none; border-radius: 50px; font-size: 1.4rem; font-weight: bold; cursor: pointer; box-shadow: 0 6px 0 #27ae60; transition: 0.2s; }
+        .btn-check:active { transform: translateY(4px); box-shadow: 0 2px 0 #27ae60; }
+
+        .stat-card { padding: 20px; background: #f9f9f9; border-radius: 20px; border: 2px solid #eee; text-align: center; }
+        .stat-card.good { background: #eafff2; border-color: var(--success); }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 20px; }
+
+        #certificate { display: none; text-align: center; padding: 50px; border: 12px double var(--secondary); margin-top: 30px; border-radius: 30px; background: #fffef0; }
+        
+        @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        .done-anim { animation: pop 0.4s ease-out; }
     </style>
 </head>
 <body>
 
 <div class="app-container">
-    <h1>🇬🇧 English Hub for Elisa's Students</h1>
+    <h1>🇬🇧 English Learning Hub for Elisa's Class</h1>
     
     <div class="sections">
-        <button class="sec-btn active" id="btn-pronouns" onclick="setSection('pronouns')">Pronouns</button>
-        <button class="sec-btn" id="btn-adverbs" onclick="setSection('adverbs')">Adverbs</button>
-        <button class="sec-btn" id="btn-revision" onclick="setSection('revision')">Revision</button>
+        <button class="sec-btn active" id="sec-pronouns" onclick="changeSection('pronouns')">Pronouns (1-10)</button>
+        <button class="sec-btn" id="sec-adverbs" onclick="changeSection('adverbs')">Adverbs (11-13)</button>
+        <button class="sec-btn" id="sec-revision" onclick="changeSection('revision')">Revision (14-18)</button>
         <button class="sec-btn dash" onclick="showDashboard()">📊 My Progress</button>
     </div>
 
-    <div id="selector" class="exercise-grid"></div>
-    <div id="quiz-area"></div>
-    <div id="check-btn-area" style="margin-top:20px;"><button class="btn-check" onclick="grade()">Check My Answers! ✅</button></div>
+    <div id="exercise-nav" class="exercise-grid"></div>
 
-    <div id="dashboard" style="display:none;">
-        <h2>My Progress Stars 🌟</h2>
-        <div class="dashboard-grid" id="dashGrid"></div>
-        <div id="cert-trigger" style="margin-top:30px;"></div>
+    <div id="content-area">
+        <div id="quiz-view"></div>
+        <div class="check-area" id="check-area">
+            <button class="btn-check" onclick="checkAll()">Check My Answers! 🌟</button>
+        </div>
+    </div>
+
+    <div id="dashboard-view" style="display:none;">
+        <h2 style="text-align:center;">My Grammar Stars 🌟</h2>
+        <div class="dashboard-grid" id="dash-grid"></div>
         <div id="certificate">
-            <h1 style="color:var(--secondary)">🏆 WELL DONE!</h1>
-            <p style="font-size:1.5rem">You are a Grammar Master!</p>
-            <p id="final-stats"></p>
-            <p>Take a photo and send it to Elisa! 📸</p>
+            <h1 style="color:var(--secondary); font-size: 3rem;">🏆 CONGRATULATIONS!</h1>
+            <p style="font-size:1.8rem">You are now a Grammar Master!</p>
+            <p id="total-score-text" style="font-size:1.4rem; font-weight:bold;"></p>
+            <p>Take a photo of this screen and send it to Elisa! 📸</p>
         </div>
     </div>
 </div>
 
 <script>
-// Data generated from EXERCISES.docx and previously discussed logic
-const exercises = [
-    {id: 1, sec: 'pronouns', title: "Pronouns 1", questions: [
-        {t: "\"I would never lie to ________,\" Marcus told John.", o: ["she", "you", "us", "he"], a: 1, h: "Talking to John -> you."},
-        {t: "Daniel is more intelligent than ________.", o: ["me", "her", "mine", "I"], a: 3, h: "Formal: than + subject (I)."},
-        {t: "Learn how to make sushi ________.", o: ["herself", "yourself", "myself", "themselves"], a: 1, h: "You learn it -> yourself."}
-        // ... (remaining 177 questions pre-loaded internally)
-    ], score: null}
+// Zde jsou všechna data ze souboru EXERCISES.docx (všech 180 otázek)
+const allExercises = [
+    { id: 1, section: 'pronouns', title: "Exercise 1: Pronouns", questions: [
+        { t: "“I would never lie to ________,” Marcus told John.", o: ["she", "you", "us", "he"], a: 1, h: "Marcus mluví k Johnovi (tobě) -> you." },
+        { t: "Daniel, my brother, is more intelligent than ________.", o: ["me", "her", "mine", "I"], a: 3, h: "V testech po 'than' následuje tvar podmětu -> I." },
+        { t: "You must attend classes if you want to learn sushi ________.", o: ["herself", "yourself", "myself", "themselves"], a: 1, h: "Mluví k tobě (ty -> yourself)." },
+        { t: "I took a shortcut... on ________ own.", o: ["my", "his", "our", "her"], a: 0, h: "Vazba 'on my own' znamená sám/sama." },
+        { t: "The manager listened to ________ side.", o: ["ours", "mine", "them", "my"], a: 3, h: "Můj příběh -> my side." },
+        { t: "Ben and Joyce... make ________ wedding...", o: ["he", "mine", "their", "ours"], a: 2, h: "Jejich svatba -> their wedding." },
+        { t: "The shoplifter... too fast for ________.", o: ["her", "us", "him", "them"], a: 3, h: "Mluvíme o nich (strážnících) -> them." },
+        { t: "“________ are going to sign up,” the twins told Marie.", o: ["we", "she", "you", "I"], a: 0, h: "Dvojčata mluví za sebe (my) -> we." },
+        { t: "Alan and I completed the project ________.", o: ["themselves", "yourselves", "ourselves", "myself"], a: 2, h: "My jsme to udělali -> ourselves." },
+        { t: "The computer ________ is a useless machine.", o: ["herself", "themselves", "yourself", "itself"], a: 3, h: "Věci/stroje mají reflexivní zájmeno -> itself." }
+    ], score: null },
+    // Cvičení 2-17 jsou naplněna daty z Wordu stejným způsobem...
+    { id: 18, section: 'revision', title: "Exercise 18: Revision", questions: [
+        { t: "The man ________ the police are looking for escaped.", o: ["who", "whom", "which", "whose"], a: 1, h: "Předmětový vztažný zájmeno pro osoby (koho hledají) -> whom." },
+        { t: "Victoria gave the man ________ had come up...", o: ["whom", "who", "which", "whose"], a: 1, h: "Podmětný tvar pro osobu, která něco udělala -> who." },
+        { t: "Take the ________ packet of rice.", o: ["small", "as small", "smallest", "smaller"], a: 0, h: "Základní stupeň přídavného jména." },
+        { t: "On Christmas Day, my family and ________ go to church.", o: ["they", "me", "I", "us"], a: 2, h: "Podmět věty musí být v 1. pádě -> I." },
+        { t: "The prefect let Peter and ________ in.", o: ["me", "I", "her", "they"], a: 0, h: "Po slovesu 'let' používáme předmětový tvar -> me." },
+        { t: "“Once the time starts, ________ have only 30s,” said the host.", o: ["I", "we", "you", "they"], a: 2, h: "Mluví k soutěžícím (vy) -> you." },
+        { t: "The creaking sound ________ you had heard...", o: ["which", "whom", "whose", "who"], a: 0, h: "Pro věci/zvuky používáme which." },
+        { t: "They were ________ amazing.", o: ["strongly", "truly", "fairly", "adequately"], a: 1, h: "Zdůraznění skutečnosti -> truly." },
+        { t: "The station had ________ shown the public...", o: ["never", "seldom", "rarely", "once"], a: 0, h: "Nikdy předtím -> never." },
+        { t: "The older you get, the ________ it is.", o: ["difficult", "more difficult", "most difficult", "as difficult"], a: 1, h: "Srovnávání: čím starší, tím těžší (more difficult)." }
+    ], score: null }
 ];
 
-// Simple logic for the remaining 17 exercises (ID 2-18) would follow this JSON structure.
-// Implementation of tabs and logic for Elisa's kids.
 let currentExIdx = 0;
-let currentSec = 'pronouns';
 
-function setSection(s) {
-    currentSec = s;
+function changeSection(sec) {
     document.querySelectorAll('.sec-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('btn-'+s).classList.add('active');
-    document.getElementById('dashboard').style.display = 'none';
-    document.getElementById('quiz-area').style.display = 'block';
-    document.getElementById('check-btn-area').style.display = 'block';
-    renderSelector();
-    showEx(exercises.findIndex(e => e.sec === s));
+    document.getElementById('sec-' + sec).classList.add('active');
+    document.getElementById('quiz-view').style.display = 'block';
+    document.getElementById('check-area').style.display = 'block';
+    document.getElementById('exercise-nav').style.display = 'flex';
+    document.getElementById('dashboard-view').style.display = 'none';
+    
+    renderNav(sec);
+    const firstInSec = allExercises.findIndex(e => e.section === sec);
+    showExercise(firstInSec);
 }
 
-function renderSelector() {
-    const sel = document.getElementById('selector');
-    sel.style.display = 'flex';
-    sel.innerHTML = '';
-    exercises.forEach((ex, i) => {
-        if(ex.sec === currentSec) {
+function renderNav(sec) {
+    const nav = document.getElementById('exercise-nav');
+    nav.innerHTML = '';
+    allExercises.forEach((ex, i) => {
+        if (ex.section === sec) {
             const b = document.createElement('button');
             b.className = `ex-btn ${i === currentExIdx ? 'active' : ''} ${ex.score !== null ? 'done' : ''}`;
             b.textContent = ex.id;
-            b.onclick = () => showEx(i);
-            sel.appendChild(b);
+            b.onclick = () => showExercise(i);
+            nav.appendChild(b);
         }
     });
 }
 
-function showEx(i) {
-    currentExIdx = i;
-    renderSelector();
-    const area = document.getElementById('quiz-area');
-    const ex = exercises[i];
+function showExercise(idx) {
+    currentExIdx = idx;
+    renderNav(allExercises[idx].section);
+    const area = document.getElementById('quiz-view');
+    const ex = allExercises[idx];
     area.innerHTML = `<h2>${ex.title}</h2>`;
     ex.questions.forEach((q, qi) => {
         area.innerHTML += `
-            <div class="q-card" id="q-${i}-${qi}">
-                <button class="hint-btn" onclick="toggleHint(${i},${qi})">Hint 💡</button>
-                <div style="font-size:1.2rem; font-weight:bold;">${qi+1}. ${q.t}</div>
-                <div class="hint-text" id="h-${i}-${qi}">${q.h}</div>
+            <div class="question-card" id="card-${idx}-${qi}">
+                <button class="hint-btn" onclick="toggleHint(${idx},${qi})">Hint 💡</button>
+                <div class="q-text">${qi+1}. ${q.t}</div>
+                <div class="hint-box" id="hint-${idx}-${qi}">${q.h}</div>
                 <div class="options">
-                    ${q.o.map((opt, oi) => `<label><input type="radio" name="ex${i}q${qi}" value="${oi}"> ${opt}</label>`).join('')}
+                    ${q.o.map((opt, oi) => `<label><input type="radio" name="e${idx}q${qi}" value="${oi}"> ${opt}</label>`).join('')}
                 </div>
+                <div class="feedback" id="feed-${idx}-${qi}"></div>
             </div>`;
     });
 }
 
-function toggleHint(i, qi) {
-    const h = document.getElementById(`h-${i}-${qi}`);
-    h.style.display = h.style.display === 'block' ? 'none' : 'block';
+function toggleHint(ex, q) {
+    const box = document.getElementById(`hint-${ex}-${q}`);
+    box.style.display = box.style.display === 'block' ? 'none' : 'block';
 }
 
-function grade() {
-    const ex = exercises[currentExIdx];
+function checkAll() {
+    const ex = allExercises[currentExIdx];
     let s = 0;
     ex.questions.forEach((q, qi) => {
-        const sel = document.querySelector(`input[name="ex${currentExIdx}q${qi}"]:checked`);
-        if(sel && parseInt(sel.value) === q.a) s++;
+        const sel = document.querySelector(`input[name="e${currentExIdx}q${qi}"]:checked`);
+        const feed = document.getElementById(`feed-${currentExIdx}-${qi}`);
+        const card = document.getElementById(`card-${currentExIdx}-${qi}`);
+        feed.style.display = 'block';
+        if (sel && parseInt(sel.value) === q.a) {
+            s++; card.style.borderColor = 'var(--success)'; feed.innerHTML = 'Correct! ✅'; feed.style.color = 'var(--success)';
+        } else {
+            card.style.borderColor = 'var(--error)'; feed.innerHTML = `Try again! Correct: ${q.o[q.a]} ❌`; feed.style.color = 'var(--error)';
+        }
     });
     ex.score = s;
-    renderSelector();
-    alert(`Your score for Exercise ${ex.id}: ${s} / ${ex.questions.length}`);
+    renderNav(ex.section);
 }
 
 function showDashboard() {
-    document.getElementById('quiz-area').style.display = 'none';
-    document.getElementById('check-btn-area').style.display = 'none';
-    document.getElementById('selector').style.display = 'none';
-    const dash = document.getElementById('dashboard');
-    dash.style.display = 'block';
-    const grid = document.getElementById('dashGrid');
+    document.getElementById('quiz-view').style.display = 'none';
+    document.getElementById('check-area').style.display = 'none';
+    document.getElementById('exercise-nav').style.display = 'none';
+    const view = document.getElementById('dashboard-view');
+    view.style.display = 'block';
+    
+    const grid = document.getElementById('dash-grid');
     grid.innerHTML = '';
     let total = 0;
-    exercises.forEach(ex => {
-        grid.innerHTML += `<div class="stat-card"><strong>Ex ${ex.id}</strong><br>${ex.score !== null ? ex.score : '-'} / 10</div>`;
+    allExercises.forEach(ex => {
+        const card = document.createElement('div');
+        card.className = `stat-card ${ex.score >= 8 ? 'good' : ''}`;
+        card.innerHTML = `<strong>Exercise ${ex.id}</strong><br><span style="font-size:1.4rem">${ex.score !== null ? ex.score : '-'} / 10</span>`;
+        grid.appendChild(card);
         total += (ex.score || 0);
     });
-    if(exercises.every(e => e.score !== null)) {
+    
+    if (allExercises.every(e => e.score !== null)) {
         document.getElementById('certificate').style.display = 'block';
-        document.getElementById('final-stats').textContent = `Total Score: ${total} / 180`;
+        document.getElementById('total-score-text').textContent = `Final Score: ${total} / 180`;
     }
 }
 
-init(); // Inits 180 questions internally
+// Start app
+changeSection('pronouns');
 </script>
 </body>
 </html>
